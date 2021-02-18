@@ -1,0 +1,16 @@
+dt.appConfigs[0].corpId=123
+dt.appConfigs[0].agentId=123
+dt.appConfigs[0].appKey=123
+dt.appConfigs[0].appSecret=123
+dt.appConfigs[0].aesKey=123
+dt.appConfigs[0].token=123
+dt.appConfigs[0].appKeyOrCorpId=123
+
+dt.appConfigs[1].corpId=1234
+dt.appConfigs[1].agentId=1234
+dt.appConfigs[1].appKey=1234
+dt.appConfigs[1].appSecret=1234
+dt.appConfigs[1].aesKey=1234
+dt.appConfigs[1].token=1234
+dt.appConfigs[1].appKeyOrCorpId=1234
+
