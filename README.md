@@ -1,7 +1,7 @@
 # dtjava-demo
 
-#### 基于 `Spring Boot` 构建出`DtJava`的demo程序
-DtJava仓库为https://github.com/tingyugetc520/DtJava
+#### 基于 `Spring Boot` 整合钉钉 Java SDK`DtJava`
+[点击查看关于DtJava的更多消息](https://github.com/tingyugetc520/DtJava)
 
 ## Guide：
 1. 复制 `application.properties.sample` 为 `application.properties` 文件
