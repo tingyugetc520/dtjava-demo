@@ -19,16 +19,21 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(DtProperties.class)
 public class DtConfiguration {
-    private LogHandler logHandler;
-    private ContactUserAddHandler contactUserAddHandler;
+    private final LogHandler logHandler;
+    private final ContactUserAddHandler contactUserAddHandler;
 
-    private DtProperties properties;
+    private final DtProperties properties;
 
-    private static Map<String, DtMessageRouter> routers = Maps.newHashMap();
+    private final static Map<String, DtMessageRouter> ROUTERS = Maps.newHashMap();
+    private static DtMessageRouter router;
     private static Map<String, DtService> dtServices = Maps.newHashMap();
 
     public static Map<String, DtMessageRouter> getRouters() {
-        return routers;
+        return ROUTERS;
+    }
+
+    public static DtMessageRouter getRouter() {
+        return router;
     }
 
     public static DtService getDtService(String appKey) {
@@ -36,7 +41,12 @@ public class DtConfiguration {
     }
 
     @PostConstruct
-    public void initServices() {
+    public void init() {
+        initServices();
+        initRouter();
+    }
+
+    private void initServices() {
         dtServices = this.properties.getAppConfigs().stream().map(a -> {
             DtDefaultConfigImpl configStorage = new DtDefaultConfigImpl();
             configStorage.setCorpId(a.getCorpId());
@@ -50,7 +60,7 @@ public class DtConfiguration {
 
             DtService service = new DtServiceImpl();
             service.setDtConfigStorage(configStorage);
-            routers.put(a.getAppKey(), this.newRouter(service));
+            ROUTERS.put(a.getAppKey(), this.newRouter(service));
             return service;
         }).collect(Collectors.toMap(service -> service.getDtConfigStorage().getAppKey(), a -> a));
     }
@@ -61,8 +71,12 @@ public class DtConfiguration {
         // 通讯录用户增加事件
         newRouter.rule().async(false).eventType("user_add_org").handler(this.contactUserAddHandler).end();
 
-        // 默认,记录所有事件的日志 （异步执行）
-        newRouter.rule().async(false).handler(this.logHandler).end();
+        // 默认,记录所有事件的日志（异步执行）
+        newRouter.rule().async(true).handler(this.logHandler).end();
         return newRouter;
+    }
+
+    private void initRouter() {
+        router = new DtMessageRouter();
     }
 }

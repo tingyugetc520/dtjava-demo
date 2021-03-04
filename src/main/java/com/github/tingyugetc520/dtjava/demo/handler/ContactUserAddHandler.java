@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class ContactUserAddHandler implements DtMessageHandler {
 
     @Override
-    public boolean handle(DtEventMessage message, Map<String, Object> context, DtService dtService) throws DtErrorException {
+    public Boolean handle(DtEventMessage message, Map<String, Object> context, DtService dtService) throws DtErrorException {
         log.info("contact user add:{}", message);
 
         String userId = (String) message.getAllFieldsMap().get("UserId");

@@ -9,14 +9,14 @@ import com.github.tingyugetc520.ali.dingtalk.message.DtMessageHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
 @Component
 @Slf4j
 public class LogHandler implements DtMessageHandler {
 
     @Override
-    public boolean handle(DtEventMessage message, Map<String, Object> context, DtService dtService) throws DtErrorException {
+    public Boolean handle(DtEventMessage message, Map<String, Object> context, DtService dtService) throws DtErrorException {
         log.info("message:{}", message);
-        return true;
+        // 不做任何处理
+        return null;
     }
 }

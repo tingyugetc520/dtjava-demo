@@ -23,17 +23,30 @@ public class DtEventController {
         final DtService dtService = DtConfiguration.getDtService(appKey);
         DtEventMessage inMessage = DtEventMessage.fromEncryptedJson(requestBody, dtService.getDtConfigStorage(), timestamp, nonce, signature);
         log.info("消息解密后内容为：{} ", inMessage);
-        boolean outMessage = this.route(appKey, inMessage);
-        log.info("消息处理结果: {}", outMessage);
+        Boolean outMessage = this.route(appKey, inMessage);
+        log.info("应用消息处理结果: {}", outMessage);
+
+        outMessage = this.route(dtService, inMessage);
+        log.info("统一消息处理结果: {}", outMessage);
 
         DtEventOutMessage res = DtEventOutMessage.toEncrypted(dtService.getDtConfigStorage(), outMessage);
         log.info("组装回复信息：{}", res);
         return res.toEncryptedJson();
     }
 
-    private boolean route(String appKey, DtEventMessage message) {
+    private Boolean route(String appKey, DtEventMessage message) {
         try {
             return DtConfiguration.getRouters().get(appKey).route(message);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        return false;
+    }
+
+    private Boolean route(DtService dtService, DtEventMessage message) {
+        try {
+            return DtConfiguration.getRouter().route(dtService, message);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
