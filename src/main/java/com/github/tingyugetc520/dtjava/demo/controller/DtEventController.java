@@ -34,6 +34,12 @@ public class DtEventController {
         return res.toEncryptedJson();
     }
 
+    /**
+     * 获取到具体的DtMessageRouter来处理消息
+     * @param appKey
+     * @param message
+     * @return
+     */
     private Boolean route(String appKey, DtEventMessage message) {
         try {
             return DtConfiguration.getRouters().get(appKey).route(message);
@@ -44,6 +50,12 @@ public class DtEventController {
         return false;
     }
 
+    /**
+     * 直接使用统一的DtMessageRouter来处理消息
+     * @param dtService
+     * @param message
+     * @return
+     */
     private Boolean route(DtService dtService, DtEventMessage message) {
         try {
             return DtConfiguration.getRouter().route(dtService, message);
