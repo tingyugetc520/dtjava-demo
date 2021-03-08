@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>com.github.tingyugetc520</groupId>
 			<artifactId>dt-java</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1.2</version>
 		</dependency>
 
 		<dependency>
@@ -68,21 +68,8 @@
 
 	<repositories>
 		<repository>
-			<id>github-dt-java-repo</id>
-			<name>The Maven Repository on Github</name>
-			<url>https://tingyugetc520.github.io/DtJava/maven-repo/</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
-		</repository>
-		<repository>
 			<id>huawei-maven</id>
 			<url>https://repo.huaweicloud.com/repository/maven</url>
-		</repository>
-		<repository>
-			<id>ali-maven</id>
-			<url>https://maven.aliyun.com/repository/public</url>
 		</repository>
 		<repository>
 			<id>central</id>
@@ -94,10 +81,6 @@
 		<pluginRepository>
 			<id>huawei-plugin-maven</id>
 			<url>https://repo.huaweicloud.com/repository/maven</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>ali-plugin-maven</id>
-			<url>https://maven.aliyun.com/repository/public</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>central-plugin</id>
